@@ -24,7 +24,6 @@ class Users(db.Model, UserMixin):
 
     def __init__(self, **kwargs):
         for property, value in kwargs.items():
-            print(property)
             # depending on whether value is an iterable or not, we must
             # unpack it's value (when **kwargs is request.form, some values
             # will be a 1-element list)
@@ -55,3 +54,5 @@ def request_loader(request):
     username = request.form.get('username')
     user = Users.query.filter_by(username=username).first()
     return user if user else None
+
+

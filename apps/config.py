@@ -5,6 +5,7 @@ Copyright (c) 2019 - present AppSeed.us
 
 import os
 from decouple import config
+from enum import Enum
 
 
 class Config(object):
@@ -14,7 +15,7 @@ class Config(object):
     SECRET_KEY = config('SECRET_KEY', default='S#perS3crEt_007')
 
     # This will create a file in <app> FOLDER
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@localhost:5432/MinsurSSO' #'sqlite:///' + os.path.join(basedir, 'db.sqlite3')
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@localhost:5432/MinsurSSO'  # 'sqlite:///' + os.path.join(basedir, 'db.sqlite3')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
@@ -46,3 +47,9 @@ config_dict = {
     'Production': ProductionConfig,
     'Debug': DebugConfig
 }
+
+
+class UserLevel(Enum):
+    DEV = 1
+    COMMON_USER = 5
+
