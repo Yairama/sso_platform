@@ -8,7 +8,6 @@ from wtforms import StringField, PasswordField
 from wtforms.validators import Email, DataRequired
 
 # login and registration
-from wtforms.widgets import NumberInput, TelInput
 
 
 class LoginForm(FlaskForm):

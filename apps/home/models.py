@@ -20,6 +20,7 @@ class Workers(db.Model):
     area_2_id = db.Column("area_2_id", db.Integer)
     job_title = db.Column("job_title", db.Text, nullable=False)
     time_creation = db.Column("time_creation", db.TIMESTAMP, default=func.now(), nullable=False)
+    time_elimination = db.Column("time_elimination", db.TIMESTAMP, nullable=True)
 
     def __int__(self, **kwargs):
         for property, value in kwargs.items():
@@ -29,8 +30,9 @@ class Workers(db.Model):
 class Areas(db.Model):
     __tablename__ = 'tb_areas'
     id = db.Column("id", db.Integer, primary_key=True, nullable=False)
-    area = db.Column("area", db.Text, unique=True, nullable=False)
+    area = db.Column("area", db.Text, nullable=False)
     time_creation = db.Column("time_creation", db.TIMESTAMP, default=func.now(), nullable=False)
+    time_elimination = db.Column("time_elimination", db.TIMESTAMP, nullable=True)
 
     def __int__(self, **kwargs):
         for property, value in kwargs.items():
@@ -40,9 +42,10 @@ class Areas(db.Model):
 class Companies(db.Model):
     __tablename__ = 'tb_companies'
     id = db.Column("id", db.Integer, primary_key=True, nullable=False)
-    company = db.Column("company", db.Text, unique=True, nullable=False)
-    ruc = db.Column("ruc", db.Text, unique=True, nullable=False)
+    company = db.Column("company", db.Text, nullable=False)
+    ruc = db.Column("ruc", db.Text, nullable=False)
     time_creation = db.Column("time_creation", db.TIMESTAMP, default=func.now(), nullable=False)
+    time_elimination = db.Column("time_elimination", db.TIMESTAMP, nullable=True)
 
     def __int__(self, **kwargs):
         for property, value in kwargs.items():
@@ -52,14 +55,19 @@ class Companies(db.Model):
 class VCC(db.Model):
     __tablename__ = 'tb_vcc'
     id = db.Column("id", db.Integer, primary_key=True, nullable=False)
-    name = db.Column("name", db.Text, unique=True, nullable=False)
-    code = db.Column("code", db.Text, unique=True, nullable=False)
+    name = db.Column("name", db.Text, nullable=False)
+    code = db.Column("code", db.Text, nullable=False)
     version = db.Column("version", db.Text, nullable=False)
+    elaboration_date = db.Column("elaboration_date", db.Date, nullable=False)
     time_creation = db.Column("time_creation", db.TIMESTAMP, default=func.now(), nullable=False)
+    time_elimination = db.Column("time_elimination", db.TIMESTAMP, nullable=True)
 
     def __int__(self, **kwargs):
         for property, value in kwargs.items():
             setattr(self, property, value)
+
+    def __repr__(self):
+        return "<VCC(id='%s', name='%s')>" % (self.id, self.name)
 
 
 class VCCFormAnswers(db.Model):
@@ -69,9 +77,10 @@ class VCCFormAnswers(db.Model):
     worker_id = db.Column("worker_id", db.Integer, nullable=False)
     observed_area_id = db.Column("observed_area_id", db.Integer, nullable=False)
     company_id = db.Column("company_id", db.Integer, nullable=False)
-    event_date = db.Column("company_id", db.Date, nullable=False)
+    event_date = db.Column("event_date", db.Date, nullable=False)
     verified_job = db.Column("verified_job", db.Text, nullable=False)
     time_creation = db.Column("time_creation", db.TIMESTAMP, default=func.now(), nullable=False)
+    time_elimination = db.Column("time_elimination", db.TIMESTAMP, nullable=True)
 
     def __int__(self, **kwargs):
         for property, value in kwargs.items():
@@ -82,9 +91,10 @@ class VCCQuestions(db.Model):
     __tablename__ = 'tb_vcc_questions'
     id = db.Column("id", db.Integer, primary_key=True, nullable=False)
     vcc_id = db.Column("vcc_id", db.Integer, nullable=False)
-    code = db.Column("code", db.Text, nullable=False, unique=True)
-    question = db.Column("question", db.Text, nullable=False, unique=True)
+    code = db.Column("code", db.Text, nullable=False)
+    question = db.Column("question", db.Text, nullable=False)
     time_creation = db.Column("time_creation", db.TIMESTAMP, default=func.now(), nullable=False)
+    time_elimination = db.Column("time_elimination", db.TIMESTAMP, nullable=True)
 
     def __int__(self, **kwargs):
         for property, value in kwargs.items():
@@ -95,9 +105,10 @@ class VCCSubQuestions(db.Model):
     __tablename__ = 'tb_vcc_sub_questions'
     id = db.Column("id", db.Integer, primary_key=True, nullable=False)
     vcc_question_id = db.Column("vcc_question_id", db.Integer, nullable=False)
-    code = db.Column("code", db.Text, nullable=False, unique=True)
-    sub_question = db.Column("sub_question", db.Text, nullable=False, unique=True)
+    code = db.Column("code", db.Text, nullable=False)
+    sub_question = db.Column("sub_question", db.Text, nullable=False)
     time_creation = db.Column("time_creation", db.TIMESTAMP, default=func.now(), nullable=False)
+    time_elimination = db.Column("time_elimination", db.TIMESTAMP, nullable=True)
 
     def __int__(self, **kwargs):
         for property, value in kwargs.items():
@@ -114,6 +125,7 @@ class VCCSubQuestionsAnswers(db.Model):
     when = db.Column("when", db.TIMESTAMP, nullable=False)
     state = db.Column("state", db.Text, nullable=False)
     time_creation = db.Column("time_creation", db.TIMESTAMP, default=func.now(), nullable=False)
+    time_elimination = db.Column("time_elimination", db.TIMESTAMP, nullable=True)
 
     def __int__(self, **kwargs):
         for property, value in kwargs.items():

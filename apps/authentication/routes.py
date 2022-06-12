@@ -60,7 +60,6 @@ def login():
 def register():
     create_account_form = CreateAccountForm(request.form)
     if 'register' in request.form:
-        print(request.form.to_dict())
         username = request.form['username']
         email = request.form['email']
 
