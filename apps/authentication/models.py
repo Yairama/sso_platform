@@ -37,7 +37,7 @@ class Users(db.Model, UserMixin):
                 value = hash_pass(value)  # we need bytes here (not plain str)
 
             if property == 'document':
-                setattr(self, 'work_id', value)
+                setattr(self, 'worker_id', value)
                 continue
 
             setattr(self, property, value)
