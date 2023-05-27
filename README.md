@@ -21,5 +21,5 @@ This project had a lot of expectations, however it did not prosper due to IT.
 
 If anyone from IT reads this, haha salu2 x2
 
-<video src='https://user-images.githubusercontent.com/45445692/230271853-9fc66efb-e41b-49af-944b-bc845f4c462f.mp4
-' width=720></video>
+https://user-images.githubusercontent.com/45445692/230271853-9fc66efb-e41b-49af-944b-bc845f4c462f.mp4
+
